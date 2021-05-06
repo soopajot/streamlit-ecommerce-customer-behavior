@@ -16,7 +16,7 @@ next = st.sidebar.button('Next on list')
 
 # will use this list and next button to increment page, MUST BE in the SAME order
 # as the list passed to the radio button
-new_choice = ['Datasets','Clusterings','Gallery','Vision','About']
+new_choice = ['Transactions','Items','Visitors','Vision','About']
 
 # This is what makes this work, check directory for a pickled file that contains
 # the index of the page you want displayed, if it exists, then you pick up where the
@@ -41,22 +41,30 @@ if next:
         next_clicked = 0 # go back to the beginning i.e. homepage
 
 # create your radio button with the index that we loaded
-choice = st.sidebar.radio("go to",('Datasets','Clusterings', 'Gallery', 'Vision', 'About'), index=next_clicked)
+choice = st.sidebar.radio("go to",('Transactions','Items', 'Visitors', 'Vision', 'About'), index=next_clicked)
 
 # pickle the index associated with the value, to keep track if the radio button has been used
 pkle.dump(new_choice.index(choice), open('next.p', 'wb'))
 
 # finally get to whats on each page
-if choice == 'Datasets':
-    st.header('this is Datasets')
-elif choice == 'Clusterings':
-    st.header('here is a Clusterings page')
-elif choice == 'Gallery':
-    st.header('A Gallery of some sort')
+if choice == 'Transactions':
+    st.header('this is Transactions')
+elif choice == 'Items':
+    st.header('here is a Items page')
+elif choice == 'Visitors':
+    st.header('A Visitors of some sort')
 elif choice == 'Vision':
     st.header('The Vision')
 elif choice == 'About':
     st.header('About page')
+
+
+
+slider_modele = st.sidebar.select_slider(
+    label='Modèle :',
+    options=['Transactions', 'K-Means'],
+    value= modele_optimal
+    )
 
 from PIL import Image
 image = Image.open('images/streamlit.jpg')
