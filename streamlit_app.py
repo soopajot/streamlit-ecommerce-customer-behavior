@@ -61,7 +61,7 @@ elif choice == 'Items':
     st.image(image2, caption='Items plus achetés')
 elif choice == 'Visitors':
     st.header('Dataset Visitors')
-    stats = pd.read_csv('stats.csv')
+    stats = pd.read_csv('csv/stats.csv')
     st.write("Voici un aperçu du dataset")
     st.write(stats)
     image1 = Image.open('images/img-1.png')
