@@ -17,7 +17,7 @@ next = st.sidebar.button('Next on list')
 
 # will use this list and next button to increment page, MUST BE in the SAME order
 # as the list passed to the radio button
-new_choice = ['Transactions','Items','Visitors']
+new_choice = ['Home','Transactions','Items','Visitors']
 
 # This is what makes this work, check directory for a pickled file that contains
 # the index of the page you want displayed, if it exists, then you pick up where the
@@ -42,14 +42,19 @@ if next:
         next_clicked = 0 # go back to the beginning i.e. homepage
 
 # create your radio button with the index that we loaded
-choice = st.sidebar.radio("go to",('Transactions','Items', 'Visitors'), index=next_clicked)
+choice = st.sidebar.radio("go to",('Home','Transactions','Items', 'Visitors'), index=next_clicked)
 
 # pickle the index associated with the value, to keep track if the radio button has been used
 pkle.dump(new_choice.index(choice), open('next.p', 'wb'))
 
 # finally get to whats on each page
-if choice == 'Transactions':
+if choice == 'Home':
+    image = Image.open('images/streamlit.jpg')
+    st.image(image, caption='E-commerce Customer Behavior')
+elif choice == 'Transactions':
     st.header('Dataset Transactions')
+    image3 = Image.open('images/img-3.png')
+    st.image(image3, caption='Notre img')
 elif choice == 'Items':
     st.header('Dataset Items page')
     image2 = Image.open('images/img-2.png')
@@ -59,14 +64,6 @@ elif choice == 'Visitors':
     image1 = Image.open('images/img-1.png')
     st.image(image1, caption='Nombre de visiteurs')
 
-
-
-image = Image.open('images/streamlit.jpg')
-st.image(image, caption='Notre Heatmap')
-
-
-image3 = Image.open('images/img-3.png')
-st.image(image3, caption='Notre img')
 
 image4 = Image.open('images/img-4.png')
 st.image(image4, caption='Notre img')
