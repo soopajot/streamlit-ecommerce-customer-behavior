@@ -10,8 +10,6 @@ import streamlit as st
 Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Cras ultricies ligula sed magna dictum porta.
 """
 
-st.header('eCommerce Customer Behavior')
-
 from PIL import Image
 image = Image.open('images/streamlit.jpg')
 st.image(image, caption='Notre Heatmap')
