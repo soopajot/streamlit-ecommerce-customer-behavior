@@ -48,15 +48,15 @@ pkle.dump(new_choice.index(choice), open('next.p', 'wb'))
 
 # finally get to whats on each page
 if choice == 'Datasets':
-    st.write('this is Datasets')
+    st.header('this is Datasets')
 elif choice == 'Clusterings':
-    st.write('here is a Clusterings page')
+    st.header('here is a Clusterings page')
 elif choice == 'Gallery':
-    st.write('A Gallery of some sort')
+    st.header('A Gallery of some sort')
 elif choice == 'Vision':
-    st.write('The Vision')
+    st.header('The Vision')
 elif choice == 'About':
-    st.write('About page')
+    st.header('About page')
 
 from PIL import Image
 image = Image.open('images/streamlit.jpg')
