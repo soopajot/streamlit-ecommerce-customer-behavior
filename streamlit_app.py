@@ -48,22 +48,21 @@ pkle.dump(new_choice.index(choice), open('next.p', 'wb'))
 
 # finally get to whats on each page
 if choice == 'Transactions':
-    st.header('this is Transactions')
+    st.header('Dataset Transactions')
 elif choice == 'Items':
-    st.header('here is a Items page')
+    st.header('Dataset Items page')
+    image2 = Image.open('images/img-2.png')
+    st.image(image2, caption='Items plus achetés')
 elif choice == 'Visitors':
-    st.header('A Visitors of some sort')
+    st.header('Dataset Visitors')
+    image1 = Image.open('images/img-1.png')
+    st.image(image1, caption='Nombre de visiteurs')
 
 
 from PIL import Image
 image = Image.open('images/streamlit.jpg')
 st.image(image, caption='Notre Heatmap')
 
-image1 = Image.open('images/img-1.png')
-st.image(image1, caption='Notre img')
-
-image2 = Image.open('images/img-2.png')
-st.image(image2, caption='Notre img')
 
 image3 = Image.open('images/img-3.png')
 st.image(image3, caption='Notre img')
