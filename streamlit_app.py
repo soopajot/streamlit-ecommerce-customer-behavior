@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 import pickle as pkle
 import os.path
+from PIL import Image
 """
 # eCommerce Customer Behavior
 
@@ -59,7 +60,7 @@ elif choice == 'Visitors':
     st.image(image1, caption='Nombre de visiteurs')
 
 
-from PIL import Image
+
 image = Image.open('images/streamlit.jpg')
 st.image(image, caption='Notre Heatmap')
 
