@@ -57,13 +57,24 @@ elif choice == 'Transactions':
     st.image(image3, caption='Notre img')
 elif choice == 'Items':
     st.header('Dataset Items page')
+
+    items = pd.read_csv('csv/items.csv')
+    st.write("Voici un aperçu du dataset")
+    st.write(items)
+
     image2 = Image.open('images/img-2.png')
     st.image(image2, caption='Items plus achetés')
+
+
 elif choice == 'Visitors':
     st.header('Dataset Visitors')
+
+    # DATASET
     stats = pd.read_csv('csv/stats.csv')
     st.write("Voici un aperçu du dataset")
     st.write(stats)
+
+    #SHOW IMAGES
     image1 = Image.open('images/img-1.png')
     st.image(image1, caption='Nombre de visiteurs')
 
