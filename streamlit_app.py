@@ -39,5 +39,4 @@ image8 = Image.open('images/img-8.png')
 st.image(image8, caption='Notre img')
 
 add_selectbox = st.sidebar.selectbox("You Can do the following using this Website ",
-(“Data Pre Processing using Pandas”, “Correcting”,‘Completing’,
-‘Creating’,‘Modeling using Sklearn’))
+("Data Pre Processing using Pandas", "Correcting","Completing","Creating","Modeling using Sklearn"))
