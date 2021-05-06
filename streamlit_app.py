@@ -54,36 +54,24 @@ if choice == 'Home':
     st.image(image, caption='E-commerce Customer Behavior')
 elif choice == 'Transactions':
     st.header('Dataset Transactions')
-
-    # DATASET DF
-    stats = pd.read_csv('csv/df.csv')
-    st.write("Voici un aperçu du dataset")
-    st.write(df)
-
     #SHOW IMAGES
     image3 = Image.open('images/img-3.png')
     st.image(image3, caption='Notre img')
 elif choice == 'Items':
     st.header('Dataset Items page')
-
     # DATASET ITEMS
     items = pd.read_csv('csv/items.csv')
     st.write("Voici un aperçu du dataset")
     st.write(items)
-
     #SHOW IMAGES
     image2 = Image.open('images/img-2.png')
     st.image(image2, caption='Items plus achetés')
-
-
 elif choice == 'Visitors':
     st.header('Dataset Visitors')
-
     # DATASET STATS
     stats = pd.read_csv('csv/stats.csv')
     st.write("Voici un aperçu du dataset")
     st.write(stats)
-
     #SHOW IMAGES
     image1 = Image.open('images/img-1.png')
     st.image(image1, caption='Nombre de visiteurs')
