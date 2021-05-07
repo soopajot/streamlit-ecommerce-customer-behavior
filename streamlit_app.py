@@ -60,10 +60,6 @@ elif choice == 'Transactions':
     time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
     st.write(time_sum_tran_sample)
 
-    df = pd.DataFrame({'x': [1, 2, 3], 'y': [10, 30, 70]})
-    sns.lineplot(x='x', y='y', data=df)
-    st.pyplot()
-
     time_sum_tran_sample_1 = pd.read_csv('csv/time_sum_tran_sample_1.csv')
     st.write("Le temps total par transaction")
     st.line_chart(time_sum_tran_sample_1)
