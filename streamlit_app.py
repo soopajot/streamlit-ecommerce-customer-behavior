@@ -93,14 +93,7 @@ st.image(image8, caption='Notre img')
 
 time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
 st.write(time_sum_tran_sample)
-
-# Temps de Transactions moins d'une heure
-sum_tran_1h = time_sum_tran.loc[round(time_sum_tran['sum_time_minute']) <= 60]
-
-# Temps de transactions moins de 10 minutes
-sum_trans_10min = sum_tran_1h.loc[round(sum_tran_1h['sum_time_minute']) <= 10]
-
-
+st.line_chart(time_sum_tran_sample)
 
 #stats_all = pd.read_csv('csv/stats_all.csv')
 #top_produits_merged_buy_all = pd.read_csv('csv/top_produits_merged_buy_all.csv')
