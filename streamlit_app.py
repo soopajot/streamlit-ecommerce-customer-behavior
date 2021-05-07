@@ -92,9 +92,28 @@ st.image(image8, caption='Notre img')
 ########### Charger les datsets entiers pour voir #######
 
 time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
+st.write(time_sum_tran_sample)
+
+# Temps de Transactions moins d'une heure
+sum_tran_1h = time_sum_tran.loc[round(time_sum_tran['sum_time_minute']) <= 60]
+
+# Temps de transactions moins de 10 minutes
+sum_trans_10min = sum_tran_1h.loc[round(sum_tran_1h['sum_time_minute']) <= 10]
+
+
+sns.displot(time_sum_tran['sum_time_hour'], bins=24, kde=True, rug=True, color='orange')
+plt.title('Le temps nécessaire pour déclencer une transaction');
+
+sns.displot(sum_tran_1h['sum_time_minute'], bins=6, kde=True, rug=True, color='red')
+plt.title('Le temps nécessaire pour déclencer une transaction en moins de 1 heure ')
+
+
+sns.displot(sum_trans_10min['sum_time_minute'], bins=6, kde=True, rug=True)
+plt.title('Le temps nécessaire pour déclencer une transaction en moins de 10 minutes');
+
 #stats_all = pd.read_csv('csv/stats_all.csv')
 #top_produits_merged_buy_all = pd.read_csv('csv/top_produits_merged_buy_all.csv')
 
-st.write(time_sum_tran_sample)
+
 #st.write(stats_all)
 #st.write(top_produits_merged_buy_all)
