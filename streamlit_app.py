@@ -73,9 +73,9 @@ elif choice == 'Transactions':
 
     fig, (ax1,ax2,ax3) = plt.subplots(1, 3, figsize=(15, 5))
     fig.suptitle('Initial Pokemon - 1st Generation')
-    sns.displot(ax=ax1, time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, rug=True, color='orange')
-    sns.displot(ax=ax2, sum_tran_1h['sum_time_minute'], bins=6, kde=True, rug=True, color='red')
-    sns.displot(ax=ax3, sum_trans_10min['sum_time_minute'], bins=6, kde=True, rug=True)
+    sns.histplot(ax=ax1, time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, rug=True, color='orange')
+    sns.histplot(ax=ax2, sum_tran_1h['sum_time_minute'], bins=6, kde=True, rug=True, color='red')
+    sns.histplot(ax=ax3, sum_trans_10min['sum_time_minute'], bins=6, kde=True, rug=True)
     st.pyplot(fig)
 
     #sum_tran_1h_1 = pd.read_csv('csv/sum_tran_1h_1.csv')
