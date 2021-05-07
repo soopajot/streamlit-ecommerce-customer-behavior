@@ -92,21 +92,17 @@ elif choice == 'Transactions':
     fig.suptitle('Le temps nécessaire pour déclencer une transaction')
     sns.histplot(time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, color='orange', ax=ax1)
     ax1.set_title("heure")
-
     sns.histplot(sum_tran_1h['sum_time_minute'], bins=6, kde=True, color='red', ax=ax2)
     ax2.set_title("en moins de 1 heure")
-
     sns.histplot(sum_trans_10min['sum_time_minute'], bins=6, kde=True, ax=ax3)
     ax3.set_title("en moins de 10 minutes")
-
     st.pyplot(fig)
 
+    fig, ax = plt.subplots()
     k1 = KMeans(n_clusters=50).fit(time_sum_tran_sample)
-    plt.figure(figsize=(20, 10))
     Z = linkage(k1.cluster_centers_, method='ward', metric='euclidean')
-    plt.title("Dendrogramme CAH")
-    dn = dendrogram(Z, leaf_rotation=90.)
-    st.pyplot(dn)
+    dendrogram(Z, leaf_rotation=90.)
+    st.pyplot(fig)
 
     # AGGLOMERATIVECLUSTERING PAR 3
     ac = AgglomerativeClustering(n_clusters = 3).fit(k1.cluster_centers_)
