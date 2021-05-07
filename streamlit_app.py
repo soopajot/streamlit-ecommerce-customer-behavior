@@ -6,10 +6,7 @@ import streamlit as st
 import pickle as pkle
 import os.path
 from PIL import Image
-import matplotlib
-from matplotlib import pyplot as plt
-import numpy as np
-import seaborn as sns
+
 
 """
 # eCommerce Customer Behavior
