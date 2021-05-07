@@ -11,7 +11,13 @@ import seaborn as sns
 import matplotlib
 from matplotlib import pyplot as plt
 
+import sklearn
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.metrics import silhouette_score
+from sklearn.cluster import KMeans
 
+import scipy
+from scipy.cluster.hierarchy import dendrogram, linkage
 """
 # eCommerce Customer Behavior
 
@@ -74,6 +80,8 @@ elif choice == 'Transactions':
     #st.write("Le temps total par transaction")
     #st.line_chart(time_sum_tran_sample_1)
 
+    st.write("Le temps nécessaire pour déclencer une transaction")
+
     # Temps de Transactions moins d'une heure
     sum_tran_1h = time_sum_tran_sample.loc[round(time_sum_tran_sample['sum_time_minute']) <= 60]
 
@@ -92,6 +100,38 @@ elif choice == 'Transactions':
     ax3.set_title("en moins de 10 minutes")
 
     st.pyplot(fig)
+
+    k1 = KMeans(n_clusters=50).fit(time_sum_tran_sample)
+    plt.figure(figsize=(20, 10))
+    Z = linkage(k1.cluster_centers_, method='ward', metric='euclidean')
+    plt.title("Dendrogramme CAH")
+    dendrogram(Z, leaf_rotation=90.)
+    plt.show()
+
+    # AGGLOMERATIVECLUSTERING PAR 3
+    ac = AgglomerativeClustering(n_clusters = 3).fit(k1.cluster_centers_)
+    cd = pd.DataFrame(k1.cluster_centers_)
+
+    time_sum_tran_sample['kmean1_label'] = k1.labels_
+
+    # Ajouter la colonne agglo_label
+    for i in list(cd.index):
+        time_sum_tran_sample.loc[time_sum_tran_sample['kmean1_label'] == cd.index[i], 'agglo_label'] = ac.labels_[i]
+
+    # Get new centroids = mean of 3 labels from Agglo
+    new_centroids = time_sum_tran_sample.groupby('agglo_label').mean()
+    new_time_sum_tran_sample = time_sum_tran_sample.drop(['agglo_label'], axis=1)
+
+    k2 = KMeans(n_clusters=3, init=new_centroids)
+    k2.fit(new_time_sum_tran_sample)
+
+    # Centroids and labels
+    k2_centroids = k2.cluster_centers_
+    k2_labels = k2.labels_
+
+    # Ajouter la colonne kmean2_label
+    time_sum_tran_sample['kmean2_label'] = k2.labels_
+    #time_sum_tran_sample
 
     #sum_tran_1h_1 = pd.read_csv('csv/sum_tran_1h_1.csv')
     #st.write("Le temps total par transaction 1h")
