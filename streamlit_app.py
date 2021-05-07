@@ -66,8 +66,8 @@ elif choice == 'Transactions':
     st.line_chart(time_sum_tran_sample_1)
 
     sns.displot(time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, rug=True, color='orange')
-    plt.title('Le temps nécessaire pour déclencer une transaction');
-
+    st.pyplot()
+    
     sum_tran_1h_1 = pd.read_csv('csv/sum_tran_1h_1.csv')
     st.write("Le temps total par transaction 1h")
     st.line_chart(sum_tran_1h_1)
