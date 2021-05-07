@@ -65,7 +65,7 @@ elif choice == 'Transactions':
 
     sum_trans_10min_1 = pd.read_csv('csv/sum_trans_10min_1.csv')
     st.write("Le temps total par transaction 10min")
-    st.area_chart(sum_trans_10min_1)
+    st.bar_chart(sum_trans_10min_1)
     #SHOW IMAGES
     #image3 = Image.open('images/img-3.png')
     #st.image(image3, caption='Notre img')
