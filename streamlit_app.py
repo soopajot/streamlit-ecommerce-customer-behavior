@@ -7,6 +7,11 @@ import pickle as pkle
 import os.path
 from PIL import Image
 
+import seaborn as sns
+
+df = pd.DataFrame({'x': [1, 2, 3], 'y': [10, 30, 70]})
+sns.lineplot(x='x', y='y', data=df)
+st.pyplot()
 
 """
 # eCommerce Customer Behavior
