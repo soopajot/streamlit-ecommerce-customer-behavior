@@ -49,11 +49,15 @@ if choice == 'Home':
     #SHOW IMAGES
     image = Image.open('images/streamlit.jpg')
     st.image(image, caption='E-commerce Customer Behavior')
+########### TIME TRANSACTIONS #######
 elif choice == 'Transactions':
     st.header('Dataset Transactions')
+    time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
+    st.write(time_sum_tran_sample)
+    st.line_chart(time_sum_tran_sample)
     #SHOW IMAGES
-    image3 = Image.open('images/img-3.png')
-    st.image(image3, caption='Notre img')
+    #image3 = Image.open('images/img-3.png')
+    #st.image(image3, caption='Notre img')
 elif choice == 'Items':
     st.header('Dataset Items page')
     # DATASET ITEMS
@@ -89,11 +93,9 @@ st.image(image7, caption='Notre img')
 image8 = Image.open('images/img-8.png')
 st.image(image8, caption='Notre img')
 
-########### Charger les datsets entiers pour voir #######
 
-time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
-st.write(time_sum_tran_sample)
-st.line_chart(time_sum_tran_sample)
+
+
 
 #stats_all = pd.read_csv('csv/stats_all.csv')
 #top_produits_merged_buy_all = pd.read_csv('csv/top_produits_merged_buy_all.csv')
