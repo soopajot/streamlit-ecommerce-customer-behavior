@@ -61,20 +61,30 @@ elif choice == 'Transactions':
     time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
     st.write(time_sum_tran_sample)
 
-    time_sum_tran_sample_1 = pd.read_csv('csv/time_sum_tran_sample_1.csv')
-    st.write("Le temps total par transaction")
-    st.line_chart(time_sum_tran_sample_1)
+    #time_sum_tran_sample_1 = pd.read_csv('csv/time_sum_tran_sample_1.csv')
+    #st.write("Le temps total par transaction")
+    #st.line_chart(time_sum_tran_sample_1)
 
-    sns.displot(time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, rug=True, color='orange')
-    st.pyplot()
-    
-    sum_tran_1h_1 = pd.read_csv('csv/sum_tran_1h_1.csv')
-    st.write("Le temps total par transaction 1h")
-    st.line_chart(sum_tran_1h_1)
+    # Temps de Transactions moins d'une heure
+    sum_tran_1h = time_sum_tran_sample.loc[round(time_sum_tran_sample['sum_time_minute']) <= 60]
 
-    sum_trans_10min_1 = pd.read_csv('csv/sum_trans_10min_1.csv')
-    st.write("Le temps total par transaction 10min")
-    st.bar_chart(sum_trans_10min_1)
+    # Temps de transactions moins de 10 minutes
+    sum_trans_10min = sum_tran_1h.loc[round(sum_tran_1h['sum_time_minute']) <= 10]
+
+    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+    fig.suptitle('Initial Pokemon - 1st Generation')
+    sns.displot(ax=axes[0], time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, rug=True, color='orange')
+    sns.displot(ax=axes[1], sum_tran_1h['sum_time_minute'], bins=6, kde=True, rug=True, color='red')
+    sns.displot(ax=axes[2], sum_trans_10min['sum_time_minute'], bins=6, kde=True, rug=True)
+    st.pyplot(fig)
+
+    #sum_tran_1h_1 = pd.read_csv('csv/sum_tran_1h_1.csv')
+    #st.write("Le temps total par transaction 1h")
+    #st.line_chart(sum_tran_1h_1)
+
+    #sum_trans_10min_1 = pd.read_csv('csv/sum_trans_10min_1.csv')
+    #st.write("Le temps total par transaction 10min")
+    #st.bar_chart(sum_trans_10min_1)
     
     #SHOW IMAGES
     #image3 = Image.open('images/img-3.png')
