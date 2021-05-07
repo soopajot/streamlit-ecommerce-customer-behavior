@@ -51,9 +51,13 @@ if choice == 'Home':
     st.image(image, caption='E-commerce Customer Behavior')
 ########### TIME TRANSACTIONS #######
 elif choice == 'Transactions':
-    st.header('Dataset Transactions')
+    st.header('Dataset Transactions-Time')
     time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
     st.write(time_sum_tran_sample)
+
+    sum_tran_1h = time_sum_tran.loc[round(time_sum_tran['sum_time_minute']) <= 60]
+    
+    st.write("Le temps total par transaction")
     st.line_chart(time_sum_tran_sample)
     #SHOW IMAGES
     #image3 = Image.open('images/img-3.png')
