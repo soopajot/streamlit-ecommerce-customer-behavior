@@ -60,7 +60,8 @@ elif choice == 'Transactions':
     time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
     st.write(time_sum_tran_sample)
 
-    sns.displot(time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, rug=True, color='orange')
+    df = pd.DataFrame({'x': [1, 2, 3], 'y': [10, 30, 70]})
+    sns.lineplot(x='x', y='y', data=df)
     st.pyplot()
 
     time_sum_tran_sample_1 = pd.read_csv('csv/time_sum_tran_sample_1.csv')
