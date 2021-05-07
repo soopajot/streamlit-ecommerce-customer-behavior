@@ -98,6 +98,8 @@ elif choice == 'Transactions':
     ax3.set_title("en moins de 10 minutes")
     st.pyplot(fig)
 
+
+    st.write("Clustering sur Transactions")
     fig, ax = plt.subplots()
     k1 = KMeans(n_clusters=50).fit(time_sum_tran_sample)
     Z = linkage(k1.cluster_centers_, method='ward', metric='euclidean')
