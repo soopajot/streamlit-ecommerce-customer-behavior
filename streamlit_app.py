@@ -74,7 +74,7 @@ elif choice == 'Visitors':
 elif choice == 'Transactions':
     st.header('Dataset Transactions-Time')
     time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
-    st.header(time_sum_tran_sample)
+    st.write(time_sum_tran_sample)
 
     #time_sum_tran_sample_1 = pd.read_csv('csv/time_sum_tran_sample_1.csv')
     #st.write("Le temps total par transaction")
