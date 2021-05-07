@@ -80,7 +80,7 @@ elif choice == 'Transactions':
     #st.write("Le temps total par transaction")
     #st.line_chart(time_sum_tran_sample_1)
 
-    st.write("Le temps nécessaire pour déclencer une transaction")
+    st.header("Le temps nécessaire pour déclencer une transaction")
 
     # Temps de Transactions moins d'une heure
     sum_tran_1h = time_sum_tran_sample.loc[round(time_sum_tran_sample['sum_time_minute']) <= 60]
@@ -99,7 +99,7 @@ elif choice == 'Transactions':
     st.pyplot(fig)
 
 
-    st.write("Clustering sur Transactions")
+    st.header("Clustering sur Transactions")
     fig, ax = plt.subplots()
     k1 = KMeans(n_clusters=50).fit(time_sum_tran_sample)
     Z = linkage(k1.cluster_centers_, method='ward', metric='euclidean')
@@ -153,21 +153,21 @@ elif choice == 'Items':
     st.image(image2, caption='Items plus achetés')
 
 
+#
+#image4 = Image.open('images/img-4.png')
+#st.image(image4, caption='Notre img')
 
-image4 = Image.open('images/img-4.png')
-st.image(image4, caption='Notre img')
+#image5 = Image.open('images/img-5.png')
+#st.image(image5, caption='Notre img')
 
-image5 = Image.open('images/img-5.png')
-st.image(image5, caption='Notre img')
+#image6 = Image.open('images/img-6.png')
+#st.image(image6, caption='Notre img')
 
-image6 = Image.open('images/img-6.png')
-st.image(image6, caption='Notre img')
+#image7 = Image.open('images/img-7.png')
+#st.image(image7, caption='Notre img')
 
-image7 = Image.open('images/img-7.png')
-st.image(image7, caption='Notre img')
-
-image8 = Image.open('images/img-8.png')
-st.image(image8, caption='Notre img')
+#image8 = Image.open('images/img-8.png')
+#st.image(image8, caption='Notre img')
 
 
 
