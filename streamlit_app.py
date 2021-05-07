@@ -101,7 +101,7 @@ elif choice == 'Transactions':
     fig, ax = plt.subplots()
     k1 = KMeans(n_clusters=50).fit(time_sum_tran_sample)
     Z = linkage(k1.cluster_centers_, method='ward', metric='euclidean')
-    dendrogram(Z, leaf_rotation=90.)
+    dendrogram(Z, leaf_rotation=70.)
     st.pyplot(fig)
 
     # AGGLOMERATIVECLUSTERING PAR 3
