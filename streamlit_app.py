@@ -72,10 +72,16 @@ elif choice == 'Transactions':
     sum_trans_10min = sum_tran_1h.loc[round(sum_tran_1h['sum_time_minute']) <= 10]
 
     fig, (ax1,ax2,ax3) = plt.subplots(1, 3, figsize=(15, 5))
-    fig.suptitle('Initial Pokemon - 1st Generation')
+    fig.suptitle('Le temps nécessaire pour déclencer une transaction')
     sns.histplot(time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, color='orange', ax=ax1)
+    ax1.set_title("heure")
+
     sns.histplot(sum_tran_1h['sum_time_minute'], bins=6, kde=True, color='red', ax=ax2)
+    ax2.set_title("1 heure")
+
     sns.histplot(sum_trans_10min['sum_time_minute'], bins=6, kde=True, ax=ax3)
+    ax3.set_title("10 minutes")
+
     st.pyplot(fig)
 
     #sum_tran_1h_1 = pd.read_csv('csv/sum_tran_1h_1.csv')
