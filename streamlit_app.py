@@ -55,10 +55,17 @@ elif choice == 'Transactions':
     time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
     st.write(time_sum_tran_sample)
 
-    sum_tran_1h = time_sum_tran.loc[round(time_sum_tran['sum_time_minute']) <= 60]
-    
+    time_sum_tran_sample_1 = pd.read_csv('csv/time_sum_tran_sample_1.csv')
     st.write("Le temps total par transaction")
-    st.line_chart(time_sum_tran_sample)
+    st.line_chart(time_sum_tran_sample_1)
+
+    sum_tran_1h_1 = pd.read_csv('csv/sum_tran_1h_1.csv')
+    st.write("Le temps total par transaction 1h")
+    st.line_chart(sum_tran_1h_1)
+
+    sum_trans_10min_1 = pd.read_csv('csv/sum_trans_10min_1.csv')
+    st.write("Le temps total par transaction 10min")
+    st.line_chart(sum_trans_10min_1)
     #SHOW IMAGES
     #image3 = Image.open('images/img-3.png')
     #st.image(image3, caption='Notre img')
