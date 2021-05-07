@@ -55,6 +55,15 @@ if choice == 'Home':
     #SHOW IMAGES
     image = Image.open('images/streamlit.jpg')
     st.image(image, caption='E-commerce Customer Behavior')
+elif choice == 'Visitors':
+    st.header('Dataset Visitors')
+    # DATASET STATS
+    stats = pd.read_csv('csv/stats.csv')
+    st.write("Voici un aperçu du dataset")
+    st.write(stats)
+    #SHOW IMAGES
+    image1 = Image.open('images/img-1.png')
+    st.image(image1, caption='Nombre de visiteurs')
 ########### TIME TRANSACTIONS #######
 elif choice == 'Transactions':
     st.header('Dataset Transactions-Time')
@@ -104,15 +113,7 @@ elif choice == 'Items':
     #SHOW IMAGES
     image2 = Image.open('images/img-2.png')
     st.image(image2, caption='Items plus achetés')
-elif choice == 'Visitors':
-    st.header('Dataset Visitors')
-    # DATASET STATS
-    stats = pd.read_csv('csv/stats.csv')
-    st.write("Voici un aperçu du dataset")
-    st.write(stats)
-    #SHOW IMAGES
-    image1 = Image.open('images/img-1.png')
-    st.image(image1, caption='Nombre de visiteurs')
+
 
 
 image4 = Image.open('images/img-4.png')
