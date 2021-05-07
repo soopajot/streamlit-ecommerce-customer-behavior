@@ -77,10 +77,10 @@ elif choice == 'Transactions':
     ax1.set_title("heure")
 
     sns.histplot(sum_tran_1h['sum_time_minute'], bins=6, kde=True, color='red', ax=ax2)
-    ax2.set_title("1 heure")
+    ax2.set_title("en moins de 1 heure")
 
     sns.histplot(sum_trans_10min['sum_time_minute'], bins=6, kde=True, ax=ax3)
-    ax3.set_title("10 minutes")
+    ax3.set_title("en moins de 10 minutes")
 
     st.pyplot(fig)
 
