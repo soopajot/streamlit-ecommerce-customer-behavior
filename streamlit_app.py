@@ -6,6 +6,11 @@ import streamlit as st
 import pickle as pkle
 import os.path
 from PIL import Image
+
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+
 """
 # eCommerce Customer Behavior
 
@@ -55,6 +60,14 @@ elif choice == 'Transactions':
     time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
     st.write(time_sum_tran_sample)
 
+    sum_tran_1h = time_sum_tran_sample.loc[round(time_sum_tran_sample['sum_time_minute']) <= 60]
+    sum_trans_10min = sum_tran_1h.loc[round(sum_tran_1h['sum_time_minute']) <= 10]
+
+
+    sns.displot(time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, rug=True, color='orange')
+    plt.title('Le temps nécessaire pour déclencer une transaction');
+
+
     time_sum_tran_sample_1 = pd.read_csv('csv/time_sum_tran_sample_1.csv')
     st.write("Le temps total par transaction")
     st.line_chart(time_sum_tran_sample_1)
@@ -66,6 +79,7 @@ elif choice == 'Transactions':
     sum_trans_10min_1 = pd.read_csv('csv/sum_trans_10min_1.csv')
     st.write("Le temps total par transaction 10min")
     st.bar_chart(sum_trans_10min_1)
+    
     #SHOW IMAGES
     #image3 = Image.open('images/img-3.png')
     #st.image(image3, caption='Notre img')
