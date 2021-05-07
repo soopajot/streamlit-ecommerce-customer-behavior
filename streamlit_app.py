@@ -8,10 +8,9 @@ import os.path
 from PIL import Image
 
 import seaborn as sns
+import matplotlib
+from matplotlib import pyplot as plt
 
-df = pd.DataFrame({'x': [1, 2, 3], 'y': [10, 30, 70]})
-sns.lineplot(x='x', y='y', data=df)
-st.pyplot()
 
 """
 # eCommerce Customer Behavior
@@ -65,6 +64,9 @@ elif choice == 'Transactions':
     time_sum_tran_sample_1 = pd.read_csv('csv/time_sum_tran_sample_1.csv')
     st.write("Le temps total par transaction")
     st.line_chart(time_sum_tran_sample_1)
+
+    sns.displot(time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, rug=True, color='orange')
+    plt.title('Le temps nécessaire pour déclencer une transaction');
 
     sum_tran_1h_1 = pd.read_csv('csv/sum_tran_1h_1.csv')
     st.write("Le temps total par transaction 1h")
