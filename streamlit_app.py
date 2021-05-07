@@ -74,7 +74,7 @@ elif choice == 'Visitors':
 elif choice == 'Transactions':
     st.header('Dataset Transactions-Time')
     time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
-    st.write(time_sum_tran_sample)
+    st.header(time_sum_tran_sample)
 
     #time_sum_tran_sample_1 = pd.read_csv('csv/time_sum_tran_sample_1.csv')
     #st.write("Le temps total par transaction")
@@ -153,21 +153,21 @@ elif choice == 'Items':
     st.image(image2, caption='Items plus achetés')
 
 
-#
-#image4 = Image.open('images/img-4.png')
-#st.image(image4, caption='Notre img')
 
-#image5 = Image.open('images/img-5.png')
-#st.image(image5, caption='Notre img')
+image4 = Image.open('images/img-4.png')
+st.image(image4, caption='Notre img')
 
-#image6 = Image.open('images/img-6.png')
-#st.image(image6, caption='Notre img')
+image5 = Image.open('images/img-5.png')
+st.image(image5, caption='Notre img')
 
-#image7 = Image.open('images/img-7.png')
-#st.image(image7, caption='Notre img')
+image6 = Image.open('images/img-6.png')
+st.image(image6, caption='Notre img')
 
-#image8 = Image.open('images/img-8.png')
-#st.image(image8, caption='Notre img')
+image7 = Image.open('images/img-7.png')
+st.image(image7, caption='Notre img')
+
+image8 = Image.open('images/img-8.png')
+st.image(image8, caption='Notre img')
 
 
 
