@@ -105,8 +105,8 @@ elif choice == 'Transactions':
     plt.figure(figsize=(20, 10))
     Z = linkage(k1.cluster_centers_, method='ward', metric='euclidean')
     plt.title("Dendrogramme CAH")
-    dendrogram(Z, leaf_rotation=90.)
-    st.pyplot()
+    dn = dendrogram(Z, leaf_rotation=90.)
+    st.pyplot(dn)
 
     # AGGLOMERATIVECLUSTERING PAR 3
     ac = AgglomerativeClustering(n_clusters = 3).fit(k1.cluster_centers_)
