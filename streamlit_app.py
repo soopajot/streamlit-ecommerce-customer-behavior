@@ -92,6 +92,7 @@ st.image(image8, caption='Notre img')
 ########### Charger les datsets entiers pour voir #######
 
 time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
+
 #stats_all = pd.read_csv('csv/stats_all.csv')
 #top_produits_merged_buy_all = pd.read_csv('csv/top_produits_merged_buy_all.csv')
 
