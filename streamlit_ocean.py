@@ -26,7 +26,7 @@ from scipy.cluster.hierarchy import dendrogram, linkage
 
 st.header("Introduction")
 
-""""
+"""
 Le Dataset de notre projet provient du site Kaggle https://www.kaggle.com/retailrocket/ecommerce-dataset, dans ce jeu de données nous avons les données comportementales des utilisateurs : **visitorid**, **events**, **timestamps**, **transactionid** et **itemid**.     
 L’objectif de ce projet est d’analyser le **comportement** des **acheteurs** d’un site e-commerce.
 Comprendre les habitudes de consommation de nos acheteurs afin d’observer des **similitudes** et des **disparités** entre les différents **groupes**.
@@ -38,13 +38,13 @@ L'enjeu est d'analyser les différents groupe d’acheteurs via un modèle de **
 # DATASET DF_SAMPLE
 df_sample = pd.read_csv('csv/df_sample.csv')
 df_sample = df_sample.fillna(0)
-st.write("Voici un aperçu du dataset: ",  "Nous avons pris le soin de remplacer les **NaN** par des **zéros** afin de ne perdre aucune informations")
+st.write("Voici un aperçu du dataset: ",  "Nous avons pris le soin de remplacer les **NaN** par des **zéros** afin de ne perdre aucune information")
 st.write(df_sample)
 
 """
 # Premières analyses & Dataviz 
 
-Regardons la composition des évènements qui compose notre Dataset.
+Regardons la répartition de la variable "event" de notre Dataset.
 
 """
 
@@ -90,7 +90,7 @@ plt.grid()
 
 st.pyplot(fig_1);
 
-st.write("D'après ces deux histogrammes, nous avons remarqué que les visiteurs avaient effectué le plus d’actions au mois de **juillet** (quid promotion ?). Concernant les jours de visites c'est assez homogène sauf le dernier jour du mois(30 et 31)")
+st.write("D'après ces deux histogrammes, nous avons remarqué que les visiteurs avaient effectué le plus d’actions au mois de **juillet** (quid promotion ?). Concernant les jours de visites c'est assez homogène sauf le dernier jour du mois (**30 et 31**)")
 
 fig_2=plt.figure(figsize = (14,14))
 
