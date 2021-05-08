@@ -18,69 +18,137 @@ from sklearn.cluster import KMeans
 
 import scipy
 from scipy.cluster.hierarchy import dendrogram, linkage
-"""
-# eCommerce Customer Behavior
+import time
 
-Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Cras ultricies ligula sed magna dictum porta. 
-"""
 
-# will use this list and next button to increment page, MUST BE in the SAME order
-# as the list passed to the radio button
-new_choice = ['Home','Visitors','Transactions', 'Items']
 
-# This is what makes this work, check directory for a pickled file that contains
-# the index of the page you want displayed, if it exists, then you pick up where the
-#previous run through of your Streamlit Script left off,
-# if it's the first go it's just set to 0
-if os.path.isfile('next.p'):
-    next_clicked = pkle.load(open('next.p', 'rb'))
-    # check if you are at the end of the list of pages
-    if next_clicked == len(new_choice):
-        next_clicked = 0 # go back to the beginning i.e. homepage
-else:
-    next_clicked = 0 #the start
+st.sidebar.header("eCommerce Customer Behavior")
+st.sidebar.subheader("Menu")
 
-# this is the second tricky bit, check to see if the person has clicked the
-# next button and increment our index tracker (next_clicked)
-if next:
-    #increment value to get to the next page
-    next_clicked = next_clicked +1
+menu = st.sidebar.radio("Affichez",('Home', 'Projet et résultats', 'Présentation des 3 dataset'))
 
-    # check if you are at the end of the list of pages again
-    if next_clicked == len(new_choice):
-        next_clicked = 0 # go back to the beginning i.e. homepage
-
-# create your radio button with the index that we loaded
-choice = st.sidebar.radio("go to",('Home','Visitors','Transactions', 'Items'), index=next_clicked)
-
-# pickle the index associated with the value, to keep track if the radio button has been used
-pkle.dump(new_choice.index(choice), open('next.p', 'wb'))
-
-# finally get to whats on each page
-if choice == 'Home':
-    #SHOW IMAGES
+if menu == 'Home':
+    """
+    # eCommerce Customer Behavior
+    Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Cras ultricies ligula sed magna dictum porta. 
+    """
     image = Image.open('images/streamlit.jpg')
-    st.image(image, caption='E-commerce Customer Behavior')
-elif choice == 'Visitors':
-    st.header('Dataset Visitors')
-    # DATASET STATS
-    stats = pd.read_csv('csv/stats.csv')
-    st.write("Voici un aperçu du dataset")
-    st.write(stats)
-    #SHOW IMAGES
-    image1 = Image.open('images/img-1.png')
-    st.image(image1, caption='Nombre de visiteurs')
-########### TIME TRANSACTIONS #######
-elif choice == 'Transactions':
-    st.header('Dataset Transactions-Time')
+    st.image(image, width=698)
+elif menu == "Projet et résultats":
+    """
+    # Projet & Résultats
+    """ 
+
+    st.header("Introduction")
+
+    """
+    Le Dataset de notre projet provient du site Kaggle https://www.kaggle.com/retailrocket/ecommerce-dataset, dans ce jeu de données nous avons les données comportementales des utilisateurs : **visitorid**, **events**, **timestamps**, **transactionid** et **itemid**.     
+    L’objectif de ce projet est d’analyser le **comportement** des **acheteurs** d’un site e-commerce.
+    Comprendre les habitudes de consommation de nos acheteurs afin d’observer des **similitudes** et des **disparités** entre les différents **groupes**.
+    Notre problématique est que nous avons peu de variables et avons du **explorer** la variable **timestamp**.
+    L'enjeu est d'analyser les différents groupe d’acheteurs via un modèle de **clustering**. 
+    """ 
+
+    # DATASET DF_SAMPLE
+    df_sample = pd.read_csv('csv/df_sample.csv')
+    df_sample = df_sample.fillna(0)
+    st.write("Voici un aperçu du dataset: ",  "Nous avons pris le soin de remplacer les **NaN** par des **zéros** afin de ne perdre aucune information")
+    st.write(df_sample)
+
+    """
+    # Premières analyses & Dataviz 
+    Regardons la répartition de la variable "event" de notre Dataset.
+    """
+
+    fig=plt.figure(figsize=(4,4))
+
+    plt.pie(df_sample.event.value_counts(),
+            labels=['view', 'addtocart','transaction'],
+            colors=['steelblue','orange','green'],
+            explode = [0.1, 0, 0],
+            autopct=lambda x : str(round(x, 2)) + '%',
+            pctdistance=0.7, labeldistance=1.3,
+            shadow=True)
+    plt.legend()
+    st.pyplot(fig);
+    st.write("Ce premier graphique permet de comprendre que l’essentiel de notre dataset est constitué de **vues soit 97%** et **2,3%** **d'ajouts au panier**. A contrario, l’évènement « **transaction** » ne représente même pas **1%**. Cette analyse nous pousse à nous intéresser au comportement des **visiteurs** ainsi que les **acheteurs**. (voir graph ci-dessous)")
+
+    ###### Premières dataviz sur le comportement des visiteurs ##### 
+             
+    # Style 
+    sns.set_theme()
+    sns.set_style('whitegrid')
+    sns.set_context('paper')
+    sns.set_palette(['#39A7D0','#36ADA4'])
+
+    # Format 
+    fig_1=plt.figure(figsize = (14,14))
+
+    # Visiteurs par mois
+    plt.subplot(221)
+    sns.countplot(x='month', data=df_sample)
+    plt.title('Nombre de visiteurs par mois', fontsize=15)
+    plt.xlabel("Mois",fontsize=15)
+    plt.ylabel("Nombre de visites",fontsize=15)
+    plt.grid()
+
+    # Visiteurs par jour
+    plt.subplot(222)
+    sns.countplot(x='day', data=df_sample)
+    plt.title('Nombre de visiteurs par jour', fontsize=15)
+    plt.xlabel("Jours",fontsize=15)
+    plt.ylabel("Nombre de visites",fontsize=15)
+    plt.grid()
+
+    st.pyplot(fig_1);
+
+    st.write("D'après ces deux histogrammes, nous avons remarqué que les visiteurs avaient effectué le plus d’actions au mois de **juillet** (quid promotion ?). Concernant les jours de visites c'est assez homogène sauf le dernier jour du mois (**30 et 31**)")
+
+    fig_2=plt.figure(figsize = (14,14))
+
+    #Visiteurs par jour de semaine
+    plt.subplot(221)
+    sns.countplot(x='dayofweek', data=df_sample)
+    plt.title('Nombre de visiteurs par jour de semaine', fontsize=15)
+    plt.xlabel("Jours de la semaine",fontsize=15)
+    plt.ylabel("Nombre de visites",fontsize=15)
+    plt.grid()
+
+    # Visiteurs par heure
+    plt.subplot(222)
+    sns.countplot(x='hour', data=df_sample)
+    plt.title('Nombre de visiteurs par heure', fontsize=15)
+    plt.xlabel("Heures",fontsize=15)
+    plt.ylabel("Nombre de visites",fontsize=15)
+    plt.grid()
+
+    st.pyplot(fig_2);
+             
+    st.write("De plus les visiteurs ont tendance à **diminuer leurs activités** sur le site **durant les week-ends** et sont **réactifs en semaine**. Au niveau des horaires les visiteurs effectuent leurs actions à partir de **17 heures jusqu’au lendemain vers 7 heures**. Nous allons maintenant étudier la relation entre plusieurs variables.")
+
+    """
+    # Relation entre les différentes variables
+    """
+    st.write("Le heatmap nous permet d’analyser les corrélations entre les variables **nb_visites**, **nb_views**, **nb_addtocarts** et **nb_transactions**. Nous pouvons voir que toutes les variables sont corrélées (**0,76 à 1**). Ainsi, le **nombre de visites** et le **nombre de vues** sont **parfaitement corrélées**, ce qui semble logique car une visite est accompagnée quasi systématiquement d’une vue."
+             
+    "On remarque également la **forte corrélation** entre **le nombre d'ajouts au panier** et **le nombre de transactions** (**0.9**)." "Effectivement un produit ajouté au panier a bien plus de chance d’être acheté."
+
+    "Ce heatmap présente également les variables liées au temps (**voir dans la partie présentation des datasets**) elle montre clairement que les variables citées ci-dessus ne sont pas corrélées avec le **temps moyen passé par un visiteur pour effectuer une transaction** (très **proche de 0**), et **faiblement corrélés** avec **le temps total passé par un visiteur pour effectuer ses achats** (**entre 0,30 et 0,34**).")
+
+    # DATASET Stats pour la matrice de corrélation
+    stats_sample = pd.read_csv('csv/stats_sample.csv')
+
+    fig_3=plt.figure(figsize=(8,5))
+    sns.heatmap(stats_sample.corr(), annot=True, cmap='RdBu_r', center=0)
+    st.pyplot(fig_3);
+
+
+    """
+    # Analyse du temps nécessaire pour déclencher une transaction
+    Comme vu dans l'introduction nous avons exploité la variable **“timestamp”**, pour définir une **visite convertissante**, nous avons décidé de **calculer le temps passé pour déclencher la transaction dans une limite de 24h**. Il s’agit dans un premier temps de calculer la **différence** entre **l’heure à laquelle la transaction s’est produite** et **l’heure à laquelle chaque événement s’est produit**.
+    """
+
     time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
-    st.write(time_sum_tran_sample)
-
-    #time_sum_tran_sample_1 = pd.read_csv('csv/time_sum_tran_sample_1.csv')
-    #st.write("Le temps total par transaction")
-    #st.line_chart(time_sum_tran_sample_1)
-
-    st.header("Le temps nécessaire pour déclencer une transaction")
 
     # Temps de Transactions moins d'une heure
     sum_tran_1h = time_sum_tran_sample.loc[round(time_sum_tran_sample['sum_time_minute']) <= 60]
@@ -89,93 +157,182 @@ elif choice == 'Transactions':
     sum_trans_10min = sum_tran_1h.loc[round(sum_tran_1h['sum_time_minute']) <= 10]
 
     fig, (ax1,ax2,ax3) = plt.subplots(1, 3, figsize=(15, 5))
-    fig.suptitle('Le temps nécessaire pour déclencer une transaction')
+    #fig.suptitle('Le temps nécessaire pour déclencer une transaction', fontsize=15)
+
     sns.histplot(time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, color='orange', ax=ax1)
-    ax1.set_title("heure")
+    ax1.set_title("Dans l'heure", fontsize=15)
     sns.histplot(sum_tran_1h['sum_time_minute'], bins=6, kde=True, color='red', ax=ax2)
-    ax2.set_title("en moins de 1 heure")
+    ax2.set_title("En moins de 1 heure", fontsize=15)
     sns.histplot(sum_trans_10min['sum_time_minute'], bins=6, kde=True, ax=ax3)
-    ax3.set_title("en moins de 10 minutes")
-    st.pyplot(fig)
+    ax3.set_title("En moins de 10 minutes", fontsize=15)
+    st.pyplot(fig);
+
+    st.write(" Nous observons un comportement majoritaire de la part des visiteurs : ils  prennent **moins d’une heure à effectuer un achat**."
+    "On constate aussi qu’une grande partie de nos visiteurs effectuent leurs achats en **moins de 10 minutes**. Partant de ce constat nous avons décidé d'observer l'achat en moins de 10 minutes, les acheteurs achètent **entre 1 et 3 minutes environ**.")
+
+elif menu == "Présentation des 3 dataset":
+
+    """
+    # Présentation des 3 dataset
+    Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Cras ultricies ligula sed magna dictum porta. 
+    """
+
+    dataset = st.radio(
+        "Choisissez votre dataset",
+        ('Transactions Time', 'Visiteurs', 'Items'))
+        
+    if dataset == 'Transactions Time':
+
+        st.header('Vous avez sélectionné : Dataset Transactions-Time')
+        st.write("Voici un aperçu du dataset Transactions")
+
+        time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
+        st.write(time_sum_tran_sample)
+
+        st.header("Le temps nécessaire pour déclencer une transaction")
+
+        # Temps de Transactions moins d'une heure
+        sum_tran_1h = time_sum_tran_sample.loc[round(time_sum_tran_sample['sum_time_minute']) <= 60]
+
+        # Temps de transactions moins de 10 minutes
+        sum_trans_10min = sum_tran_1h.loc[round(sum_tran_1h['sum_time_minute']) <= 10]
+
+        fig, (ax1,ax2,ax3) = plt.subplots(1, 3, figsize=(15, 5))
+        fig.suptitle('Le temps nécessaire pour déclencer une transaction')
+
+        """
+        un histogramme réalisé grâce à seaborn, représente le temps total passé par un visiteur pour effectuer ses achats.
+        Nous observons un comportement dominant de la part des visiteurs : ils  prennent en majorité moins d’une heure à effectuer un achat.
+        On constate ainsi qu’une grande partie de nos visiteurs effectuent leurs achats en moins de 10 minutes, entre 1 et 3 minutes environ.
+        """
+
+        sns.histplot(time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, color='orange', ax=ax1)
+        ax1.set_title("heure")
+        sns.histplot(sum_tran_1h['sum_time_minute'], bins=6, kde=True, color='red', ax=ax2)
+        ax2.set_title("en moins de 1 heure")
+        sns.histplot(sum_trans_10min['sum_time_minute'], bins=6, kde=True, ax=ax3)
+        ax3.set_title("en moins de 10 minutes")
+        st.pyplot(fig)
+
+        """
+        # Résultat des clusterings
+        """
+
+        st.subheader('Observons les résultats des clusterings en fonction du nombre de clusters !')
+        nclustrers = st.slider('Choisissez votre nombre de clusters', 2, 9, 2)
+        st.write("Vous avez choisi le nombre de clusters égal à : ", nclustrers)
+
+        k1 = KMeans(n_clusters=50).fit(time_sum_tran_sample)
+        ac = AgglomerativeClustering(n_clusters=nclustrers).fit(k1.cluster_centers_)
+        cd = pd.DataFrame(k1.cluster_centers_)
+
+        time_sum_tran_sample['kmean1_label'] = k1.labels_
+
+        for i in list(cd.index):
+            time_sum_tran_sample.loc[time_sum_tran_sample['kmean1_label'] == cd.index[i], 'agglo_label'] = ac.labels_[i]
+
+        new_centroids = time_sum_tran_sample.groupby('agglo_label').mean()
+        new_time_sum_tran_sample = time_sum_tran_sample.drop(['agglo_label'], axis=1)
+
+        k2 = KMeans(n_clusters=nclustrers, init=new_centroids)
+        k2.fit(new_time_sum_tran_sample)
+
+        k2_centroids = k2.cluster_centers_
+        k2_labels = k2.labels_
+
+        time_sum_tran_sample['kmean2_label'] = k2.labels_
+
+        fig, ax = plt.subplots()
+        sns.scatterplot(data=time_sum_tran_sample, x="sum_time_hour", y=time_sum_tran_sample.index, hue="kmean2_label")
+        st.pyplot(fig)
+
+        # DENDROGRAMME
+        st.subheader("Vérifions le nombre de cluster optimal en utilisant un dendrogramme comme celui-ci :")  
+        fig, ax = plt.subplots()
+        Z = linkage(k1.cluster_centers_, method='ward', metric='euclidean')
+        dendrogram(Z, leaf_rotation=70.)
+        st.pyplot(fig)
+
+    elif dataset == 'Visiteurs':
+
+        st.header('Vous avez sélectionné : Dataset Visiteurs')
+        st.write("Voici un aperçu du dataset Visiteurs")
+
+        stats_sample = pd.read_csv('csv/stats_sample.csv')
+        st.write(stats_sample)
+
+        """
+        # Résultat des clusterings
+        """
+
+        st.subheader('Observons les résultats des clusterings en fonction du nombre de clusters !')
+        nclustrers = st.slider('Choisissez votre nombre de clusters', 2, 9, 2)
+        st.write("Vous avez choisi le nombre de clusters égal à : ", nclustrers)
+
+        k1 = KMeans(n_clusters=50).fit(stats_sample)
+        ac = AgglomerativeClustering(n_clusters=nclustrers).fit(k1.cluster_centers_)
+        cd = pd.DataFrame(k1.cluster_centers_)
+
+        stats_sample['kmean1_label'] = k1.labels_
+
+        for i in list(cd.index):
+            stats_sample.loc[stats_sample['kmean1_label'] == cd.index[i], 'agglo_label'] = ac.labels_[i]
+
+        new_centroids = stats_sample.groupby('agglo_label').mean()
+        new_stats_sample = stats_sample.drop(['agglo_label'], axis=1)
+
+        k2 = KMeans(n_clusters=nclustrers, init=new_centroids)
+        k2.fit(new_stats_sample)
+
+        k2_centroids = k2.cluster_centers_
+        k2_labels = k2.labels_
+
+        stats_sample['kmean2_label'] = k2.labels_
+
+        fig, ax = plt.subplots()
+        sns.scatterplot(data=stats_sample, x="sum_time_hour", y="nb_transactions", hue="kmean2_label")
+        st.pyplot(fig)
+
+        # DENDROGRAMME
+        st.subheader("Vérifions le nombre de cluster optimal en utilisant un dendrogramme comme celui-ci :")  
+        fig, ax = plt.subplots()
+        Z = linkage(k1.cluster_centers_, method='ward', metric='euclidean')
+        dendrogram(Z, leaf_rotation=70.)
+        st.pyplot(fig)
+
+    else:
+        st.header('Vous avez sélectionné : Dataset Items')
+        st.write("Voici un aperçu du dataset Items")
+        top_produits_merged_buy_sample = pd.read_csv('csv/top_produits_merged_buy_sample.csv')
+        st.write(top_produits_merged_buy_sample)
+
+        """
+        # Résultat des clusterings
+        """
+        st.subheader('Observons les scores et résultats des clusterings en fonction du nombre de clusters !')
+        ### SCORING SILHOUETTE AVEC LE TABLEAU top_produits_merged_buy ####
+        nclustrers = st.slider('Choisissez votre nombre de clusters', 2, 9, 2)
+        st.write("Vous avez choisi le nombre de clusters égal à : ", nclustrers)
+
+        with st.spinner('Caclul du coefficient de silhouette en cours...'):
+            time.sleep(2)
+            cluster = AgglomerativeClustering(n_clusters = nclustrers)
+            cluster.fit(top_produits_merged_buy_sample)
+            labels = cluster.labels_
+            s_score = silhouette_score(top_produits_merged_buy_sample, labels, metric='sqeuclidean')
+        st.write("Score obtenu : ",s_score)
+
+        cluster = AgglomerativeClustering(n_clusters = nclustrers)
+        cluster.fit(top_produits_merged_buy_sample)
+        labels = cluster.labels_
+
+        top_produits_merged_buy_sample['label_clustering'] = labels
+
+        fig, ax = plt.subplots()
+        sns.scatterplot(data=top_produits_merged_buy_sample, y="nb_transactions", x=top_produits_merged_buy_sample.index, hue="label_clustering",)
+        st.pyplot(fig)
+else:
+    st.write("")
 
 
-    st.header("Clustering sur Transactions")
-    fig, ax = plt.subplots()
-    k1 = KMeans(n_clusters=50).fit(time_sum_tran_sample)
-    Z = linkage(k1.cluster_centers_, method='ward', metric='euclidean')
-    dendrogram(Z, leaf_rotation=70.)
-    st.pyplot(fig)
 
-    # AGGLOMERATIVECLUSTERING PAR 3
-    ac = AgglomerativeClustering(n_clusters = 3).fit(k1.cluster_centers_)
-    cd = pd.DataFrame(k1.cluster_centers_)
-
-    time_sum_tran_sample['kmean1_label'] = k1.labels_
-
-    # Ajouter la colonne agglo_label
-    for i in list(cd.index):
-        time_sum_tran_sample.loc[time_sum_tran_sample['kmean1_label'] == cd.index[i], 'agglo_label'] = ac.labels_[i]
-
-    # Get new centroids = mean of 3 labels from Agglo
-    new_centroids = time_sum_tran_sample.groupby('agglo_label').mean()
-    new_time_sum_tran_sample = time_sum_tran_sample.drop(['agglo_label'], axis=1)
-
-    k2 = KMeans(n_clusters=3, init=new_centroids)
-    k2.fit(new_time_sum_tran_sample)
-
-    # Centroids and labels
-    k2_centroids = k2.cluster_centers_
-    k2_labels = k2.labels_
-
-    # Ajouter la colonne kmean2_label
-    time_sum_tran_sample['kmean2_label'] = k2.labels_
-    #time_sum_tran_sample
-
-    #sum_tran_1h_1 = pd.read_csv('csv/sum_tran_1h_1.csv')
-    #st.write("Le temps total par transaction 1h")
-    #st.line_chart(sum_tran_1h_1)
-
-    #sum_trans_10min_1 = pd.read_csv('csv/sum_trans_10min_1.csv')
-    #st.write("Le temps total par transaction 10min")
-    #st.bar_chart(sum_trans_10min_1)
-    
-    #SHOW IMAGES
-    #image3 = Image.open('images/img-3.png')
-    #st.image(image3, caption='Notre img')
-elif choice == 'Items':
-    st.header('Dataset Items page')
-    # DATASET ITEMS
-    items = pd.read_csv('csv/items.csv')
-    st.write("Voici un aperçu du dataset")
-    st.write(items)
-    #SHOW IMAGES
-    image2 = Image.open('images/img-2.png')
-    st.image(image2, caption='Items plus achetés')
-
-
-
-image4 = Image.open('images/img-4.png')
-st.image(image4, caption='Notre img')
-
-image5 = Image.open('images/img-5.png')
-st.image(image5, caption='Notre img')
-
-image6 = Image.open('images/img-6.png')
-st.image(image6, caption='Notre img')
-
-image7 = Image.open('images/img-7.png')
-st.image(image7, caption='Notre img')
-
-image8 = Image.open('images/img-8.png')
-st.image(image8, caption='Notre img')
-
-
-
-
-
-#stats_all = pd.read_csv('csv/stats_all.csv')
-#top_produits_merged_buy_all = pd.read_csv('csv/top_produits_merged_buy_all.csv')
-
-
-#st.write(stats_all)
-#st.write(top_produits_merged_buy_all)
