@@ -183,8 +183,8 @@ elif menu == "Projet et résultats":
     # Temps total en fonction du nombre de visites
     """
 
-    image1 = Image.open('images/nuage.jpg') 
-    st.image(image1, width=698)   
+    image= Image.open('images/nuage.jpg') 
+    st.image(image, width=698)   
     st.write("Ce premier nuage de points permet d'identifier **trois groupes d'individus**, " 
              "la somme totale du temps passé sur le site en fonction du nombre de visites. (variables choisies de manière arbitraire) "
 
@@ -193,13 +193,13 @@ elif menu == "Projet et résultats":
     # Analyse des items achetés 
     """
 
-    image2 = Image.open('images/top_itemid.jpg') 
-    st.image(image2, width=698)   
+    image= Image.open('images/top_itemid.jpg') 
+    st.image(image, width=698)   
     st.write("Cet histogramme affiche les 15 items les plus achetés, ainsi que le nombre de fois où ils ont été achetés." 
              "Ainsi, on constate que 3 produits se démarquent fortement. Ces 3 items ont pour itemid **461686**, **119736**, **213834**"
       
-    image3 = Image.open('images/top3.jpg') 
-    st.image(image3, width=698)   
+    image= Image.open('images/top3.jpg') 
+    st.image(image, width=698)   
     st.write("On constate une **croissance** des ventes pour **l’item 461686**, avec un **pic au mois d’août**, "
              "accompagné d’une **légère baisse** des ventes au **mois de septembre**. Il s‘agit peut-être d’un item dit **« saisonnier »** "
              "(ex : ventilateur). L’intérêt des visiteurs pour l’item 119736 a été assez régulier tout au long des mois, "
@@ -354,8 +354,8 @@ elif menu == "Projet et résultats":
         sns.scatterplot(data=top_produits_merged_buy_sample, y="nb_transactions", x=top_produits_merged_buy_sample.index, hue="label_clustering",)
         st.pyplot(fig)
              
-        image4 = Image.open('images/resume.jpg') 
-        st.image(image4, width=698)       
+        image= Image.open('images/resume.jpg') 
+        st.image(image, width=698)       
              
 else:
     st.write("")
