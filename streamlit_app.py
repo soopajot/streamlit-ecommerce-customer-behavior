@@ -194,13 +194,13 @@ elif menu == "Projet et résultats":
     # Analyse des items achetés 
     """
 
-    imageTop15= Image.open('images/top_itemid.png') 
-    st.image(imagetop15, width=698)   
+    imageNuage= Image.open('images/nuage.jpg') 
+    st.image(imageNuage, width=698)     
     st.write("Cet histogramme affiche les 15 items les plus achetés, ainsi que le nombre de fois où ils ont été achetés. " 
              "Ainsi, on constate que 3 produits se démarquent fortement. Ces 3 items ont pour itemid **461686**, **119736**, **213834**.")
       
     imageTop3= Image.open('images/top3.png') 
-    st.image(imageTop3, width=698)   
+    st.image(imageTop3, width=300)   
     st.write("On constate une **croissance** des ventes pour **l’item 461686**, avec un **pic au mois d’août**, "
              "accompagné d’une **légère baisse** des ventes au **mois de septembre**. Il s‘agit peut-être d’un item dit **« saisonnier »**"
              "(ex : ventilateur). L’intérêt des visiteurs pour l’item 119736 a été assez régulier tout au long des mois, "
