@@ -187,31 +187,6 @@ elif menu == "Présentation des 3 dataset":
         time_sum_tran_sample = pd.read_csv('csv/time_sum_tran_sample.csv')
         st.write(time_sum_tran_sample)
 
-        st.header("Le temps nécessaire pour déclencer une transaction")
-
-        # Temps de Transactions moins d'une heure
-        sum_tran_1h = time_sum_tran_sample.loc[round(time_sum_tran_sample['sum_time_minute']) <= 60]
-
-        # Temps de transactions moins de 10 minutes
-        sum_trans_10min = sum_tran_1h.loc[round(sum_tran_1h['sum_time_minute']) <= 10]
-
-        fig, (ax1,ax2,ax3) = plt.subplots(1, 3, figsize=(15, 5))
-        fig.suptitle('Le temps nécessaire pour déclencer une transaction')
-
-        """
-        un histogramme réalisé grâce à seaborn, représente le temps total passé par un visiteur pour effectuer ses achats.
-        Nous observons un comportement dominant de la part des visiteurs : ils  prennent en majorité moins d’une heure à effectuer un achat.
-        On constate ainsi qu’une grande partie de nos visiteurs effectuent leurs achats en moins de 10 minutes, entre 1 et 3 minutes environ.
-        """
-
-        sns.histplot(time_sum_tran_sample['sum_time_hour'], bins=24, kde=True, color='orange', ax=ax1)
-        ax1.set_title("heure")
-        sns.histplot(sum_tran_1h['sum_time_minute'], bins=6, kde=True, color='red', ax=ax2)
-        ax2.set_title("en moins de 1 heure")
-        sns.histplot(sum_trans_10min['sum_time_minute'], bins=6, kde=True, ax=ax3)
-        ax3.set_title("en moins de 10 minutes")
-        st.pyplot(fig)
-
         """
         # Résultat des clusterings
         """
