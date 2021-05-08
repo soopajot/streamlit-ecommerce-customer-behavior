@@ -26,6 +26,15 @@ st.sidebar.header("eCommerce Customer Behavior")
 st.sidebar.subheader("Menu")
 
 menu = st.sidebar.radio("Affichez",('Home', 'Projet et résultats', 'Présentation des 3 dataset'))
+st.sidebar.write(" ")
+st.sidebar.write(" ")
+st.sidebar.info('Réalisée par Mélissa Jaffal, Océane Hung May, Sadali Hewa, Sooyoung Lee Pajot')
+st.sidebar.write(" ")
+st.sidebar.write(" ")
+st.sidebar.write(" ")
+st.sidebar.write(" ")
+image = Image.open('images/datascientest.png')
+st.sidebar.image(image, width=200)
 
 if menu == 'Home':
     """
