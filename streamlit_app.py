@@ -184,8 +184,8 @@ elif menu == "Projet et résultats":
     # Temps total en fonction du nombre de visites
     """
 
-    image= Image.open('images/nuage.jpg') 
-    st.image(image, width=698)   
+    imageNuage= Image.open('images/nuage.jpg') 
+    st.image(imageNuage, width=698)   
     st.write("Ce premier nuage de points permet d'identifier **trois groupes d'individus**, " 
              "la somme totale du temps passé sur le site en fonction du nombre de visites. (variables choisies de manière arbitraire)")
 
