@@ -194,7 +194,7 @@ elif menu == "Projet et résultats":
     # Analyse des items achetés 
     """
 
-    imageNuage= Image.open('images/nuage.jpg') 
+    imageNuage= Image.open('images/top3.png') 
     st.image(imageNuage, width=698)     
     st.write("Cet histogramme affiche les 15 items les plus achetés, ainsi que le nombre de fois où ils ont été achetés. " 
              "Ainsi, on constate que 3 produits se démarquent fortement. Ces 3 items ont pour itemid **461686**, **119736**, **213834**.")
