@@ -30,7 +30,6 @@ menu = st.sidebar.radio("Affichez",('Home', 'Projet et résultats', 'Présentati
 if menu == 'Home':
     """
     # eCommerce Customer Behavior
-    Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Cras ultricies ligula sed magna dictum porta. 
     """
     image = Image.open('images/streamlit.jpg')
     st.image(image, width=698)
@@ -174,7 +173,6 @@ elif menu == "Présentation des 3 dataset":
 
     """
     # Présentation des 3 dataset
-    Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Cras ultricies ligula sed magna dictum porta. 
     """
 
     dataset = st.radio(
