@@ -184,8 +184,8 @@ elif menu == "Projet et résultats":
     # Temps total en fonction du nombre de visites
     """
 
-    imageNuage= Image.open('images/nuage.jpg') 
-    st.image(imageNuage, width=698)   
+    image= Image.open('images/nuage.jpg') 
+    st.image(image, width=698)   
     st.write("Ce premier nuage de points permet d'identifier **trois groupes d'individus**, " 
              "la somme totale du temps passé sur le site en fonction du nombre de visites. (variables choisies de manière arbitraire)")
 
@@ -193,6 +193,13 @@ elif menu == "Projet et résultats":
     """
     # Analyse des items achetés 
     """
+
+    image= Image.open('images/top_itemid.png') 
+    st.image(image, width=698)   
+    st.write("Cet histogramme affiche les 15 items les plus achetés, ainsi que le nombre de fois où ils ont été achetés." 
+             "Ainsi, on constate que 3 produits se démarquent fortement. Ces 3 items ont pour itemid **461686**, **119736**, **213834**.")
+      
+
              
             
 elif menu == "Présentation des 3 dataset":
