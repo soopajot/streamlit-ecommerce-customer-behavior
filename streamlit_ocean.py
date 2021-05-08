@@ -38,7 +38,7 @@ L'enjeu est d'analyser les différents groupe d’acheteurs via un modèle de **
 # DATASET DF_SAMPLE
 df_sample = pd.read_csv('csv/df_sample.csv')
 df_sample = df_sample.fillna(0)
-st.write("Voici un aperçu du dataset: ", "Nous avons pris le soin de ramplacer les **NaN** par des **zéros** afin de ne perdre aucune informations")
+st.write("Voici un aperçu du dataset: ",  "Nous avons pris le soin de remplacer les **NaN** par des **zéros** afin de ne perdre aucune informations")
 st.write(df_sample)
 
 """
@@ -59,7 +59,7 @@ plt.pie(df_sample.event.value_counts(),
         shadow=True)
 plt.legend()
 st.pyplot(fig);
-st.write("Ce 1er graphique permet de comprendre que l’essentiel de notre dataset est constitué de **vues 97%** et **2,3%** **d'ajouts au panier**. A contrario, l’évènement « **transaction** » ne représente même pas **1%**. Cette analyse nous pousse à nous intéresser au comportement des **visiteurs** ainsi que les **acheteurs**. (voir graph ci-dessous)")
+st.write("Ce premier graphique permet de comprendre que l’essentiel de notre dataset est constitué de **vues soit 97%** et **2,3%** **d'ajouts au panier**. A contrario, l’évènement « **transaction** » ne représente même pas **1%**. Cette analyse nous pousse à nous intéresser au comportement des **visiteurs** ainsi que les **acheteurs**. (voir graph ci-dessous)")
 
 ###### Premières dataviz sur le comportement des visiteurs ##### 
          
@@ -90,7 +90,7 @@ plt.grid()
 
 st.pyplot(fig_1);
 
-st.write("D'après ces deux histogrammes, nous avons remarqué que les consommateurs avaient effectué le plus d’actions au mois de **juillet** (quid promotion ?).")
+st.write("D'après ces deux histogrammes, nous avons remarqué que les visiteurs avaient effectué le plus d’actions au mois de **juillet** (quid promotion ?). Concernant les jours de visites c'est assez homogène sauf le dernier jour du mois(30 et 31)")
 
 fig_2=plt.figure(figsize = (14,14))
 
@@ -158,5 +158,5 @@ sns.histplot(sum_trans_10min['sum_time_minute'], bins=6, kde=True, ax=ax3)
 ax3.set_title("En moins de 10 minutes", fontsize=15)
 st.pyplot(fig);
 
-st.write(" Nous observons un comportement majoritaire de la part des visiteurs : ils  prennent moins d’une heure à effectuer un achat."
-"On constate aussi qu’une grande partie de nos visiteurs effectuent leurs achats en moins de 10 minutes. Partant de ce constat nous avons décidé d'observer l'achat en moins de 10 minutes, les acheteurs leurs achètent entre 1 et 3 minutes environ.")
+st.write(" Nous observons un comportement majoritaire de la part des visiteurs : ils  prennent **moins d’une heure à effectuer un achat**."
+"On constate aussi qu’une grande partie de nos visiteurs effectuent leurs achats en **moins de 10 minutes**. Partant de ce constat nous avons décidé d'observer l'achat en moins de 10 minutes, les acheteurs achètent **entre 1 et 3 minutes environ**.")
