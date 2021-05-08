@@ -169,6 +169,28 @@ elif menu == "Projet et résultats":
     st.write(" Nous observons un comportement majoritaire de la part des visiteurs : ils  prennent **moins d’une heure à effectuer un achat**."
     "On constate aussi qu’une grande partie de nos visiteurs effectuent leurs achats en **moins de 10 minutes**. Partant de ce constat nous avons décidé d'observer l'achat en moins de 10 minutes, les acheteurs achètent **entre 1 et 3 minutes environ**.")
 
+    
+    """
+    # Temps total en fonction du nombre de visites
+    """
+
+    kmeans = KMeans(n_clusters = 3)
+    kmeans.fit(stats_sample)
+
+    centroids = kmeans.cluster_centers_
+    labels = kmeans.labels_
+
+    colors = ["g.","r.","y."]
+
+    fig, ax = plt.subplots()
+    for i in range(1000):
+        plt.plot(stats_sample.iloc[i,0], stats_sample.iloc[i,1], colors[labels[i]], markersize = 10)
+    plt.scatter(centroids[:, 0],centroids[:, 1], marker = "o", color = "blue",s=50, linewidths = 1, zorder = 10)
+    plt.ylabel('sum_time_hour')
+    plt.xlabel('nb_visites')
+    plt.title('Temps total en fonction du nombre de visites')
+    st.pyplot(fig)
+
 elif menu == "Présentation des 3 dataset":
 
     """
