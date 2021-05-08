@@ -40,11 +40,11 @@ if menu == 'Home':
     """
     # eCommerce Customer Behavior
     """
-    image = Image.open('images/streamlit.jpg')
+    image = Image.open('images/streamlit.jpg') #nom image streamlit
     st.image(image, width=698)
 elif menu == "Projet et résultats":
     """
-    # Projet & Résultats
+    # Projet & Résultats 
     """ 
 
     st.header("Introduction")
@@ -183,24 +183,33 @@ elif menu == "Projet et résultats":
     # Temps total en fonction du nombre de visites
     """
 
-    kmeans = KMeans(n_clusters = 3)
-    kmeans.fit(stats_sample)
+    image1 = Image.open('images/nuage.jpg') 
+    st.image(image1, width=698)   
+    st.write("Ce premier nuage de points permet d'identifier **trois groupes d'individus**, " 
+             "la somme totale du temps passé sur le site en fonction du nombre de visites. (variables choisies de manière arbitraire) "
 
-    centroids = kmeans.cluster_centers_
-    labels = kmeans.labels_
+             
+    """
+    # Analyse des items achetés 
+    """
 
-    colors = ["g.","r.","y."]
+    image2 = Image.open('images/top_itemid.jpg') 
+    st.image(image2, width=698)   
+    st.write("Cet histogramme affiche les 15 items les plus achetés, ainsi que le nombre de fois où ils ont été achetés." 
+             "Ainsi, on constate que 3 produits se démarquent fortement. Ces 3 items ont pour itemid **461686**, **119736**, **213834**"
+      
+    image3 = Image.open('images/top3.jpg') 
+    st.image(image3, width=698)   
+    st.write("On constate une **croissance** des ventes pour **l’item 461686**, avec un **pic au mois d’août**, "
+             "accompagné d’une **légère baisse** des ventes au **mois de septembre**. Il s‘agit peut-être d’un item dit **« saisonnier »** "
+             "(ex : ventilateur). L’intérêt des visiteurs pour l’item 119736 a été assez régulier tout au long des mois, "
+             "avec tout de même une **baisse durant le mois de septembre**." 
+             "Enfin, on constate que **l’item 213834 n’a pas été acheté au mois de mai.**" 
+             "Cependant, il a été acheté de nombreuses fois au **mois de juillet** puis **peu de fois en août**. "        
+             
+             
 
-    fig, ax = plt.subplots()
-    for i in range(1000):
-        plt.plot(stats_sample.iloc[i,0], stats_sample.iloc[i,1], colors[labels[i]], markersize = 10)
-    plt.scatter(centroids[:, 0],centroids[:, 1], marker = "o", color = "blue",s=50, linewidths = 1, zorder = 10)
-    plt.ylabel('sum_time_hour')
-    plt.xlabel('nb_visites')
-    plt.title('Temps total en fonction du nombre de visites')
-    st.pyplot(fig)
-
-elif menu == "Présentation des 3 dataset":
+    elif menu == "Présentation des 3 dataset":
 
     """
     # Présentation des 3 dataset
@@ -249,9 +258,12 @@ elif menu == "Présentation des 3 dataset":
         fig, ax = plt.subplots()
         sns.scatterplot(data=time_sum_tran_sample, x="sum_time_hour", y=time_sum_tran_sample.index, hue="kmean2_label")
         st.pyplot(fig)
+             
+        st.write("Dans le cluster 0, les consommateurs ont tendance à passer entre 15h et 23h pour effectuer une transaction,"
+                 "pour le cluster 1 nous sommes entre 5h et 14h, enfin le cluster 2 la tendance se situe entre moins d’une heure et 4h.")
 
         # DENDROGRAMME
-        st.subheader("Vérifions le nombre de cluster optimal en utilisant un dendrogramme comme celui-ci :")  
+        st.subheader("Vérifions le nombre de cluster optimal (n=3) en utilisant un dendrogramme comme celui-ci :")  
         fig, ax = plt.subplots()
         Z = linkage(k1.cluster_centers_, method='ward', metric='euclidean')
         dendrogram(Z, leaf_rotation=70.)
@@ -296,13 +308,19 @@ elif menu == "Présentation des 3 dataset":
         fig, ax = plt.subplots()
         sns.scatterplot(data=stats_sample, x="sum_time_hour", y="nb_transactions", hue="kmean2_label")
         st.pyplot(fig)
+             
+        st.write(" Les visiteurs du cluster 2 ont en grande majorité passé entre 0 et 500 heures environ à effectuer leurs achats."
+                 "Ceux du cluster 1 ont passé entre 500 et 1500 heures, tandis que ceux du cluster 0 ont passé entre 1500 et 3000 heures.")
+                 
+
 
         # DENDROGRAMME
-        st.subheader("Vérifions le nombre de cluster optimal en utilisant un dendrogramme comme celui-ci :")  
+        st.subheader("Vérifions le nombre de cluster optimal (n=3) en utilisant un dendrogramme comme celui-ci :")  
         fig, ax = plt.subplots()
         Z = linkage(k1.cluster_centers_, method='ward', metric='euclidean')
         dendrogram(Z, leaf_rotation=70.)
         st.pyplot(fig)
+             
 
     else:
         st.header('Vous avez sélectionné : Dataset Items')
@@ -324,7 +342,7 @@ elif menu == "Présentation des 3 dataset":
             cluster.fit(top_produits_merged_buy_sample)
             labels = cluster.labels_
             s_score = silhouette_score(top_produits_merged_buy_sample, labels, metric='sqeuclidean')
-        st.write("Score obtenu : ",s_score)
+        st.write("**Score obtenu** : ",s_score)
 
         cluster = AgglomerativeClustering(n_clusters = nclustrers)
         cluster.fit(top_produits_merged_buy_sample)
@@ -335,6 +353,10 @@ elif menu == "Présentation des 3 dataset":
         fig, ax = plt.subplots()
         sns.scatterplot(data=top_produits_merged_buy_sample, y="nb_transactions", x=top_produits_merged_buy_sample.index, hue="label_clustering",)
         st.pyplot(fig)
+             
+        image4 = Image.open('images/resume.jpg') 
+        st.image(image4, width=698)       
+             
 else:
     st.write("")
 
