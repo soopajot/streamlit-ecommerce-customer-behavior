@@ -186,7 +186,7 @@ elif menu == "Projet et résultats":
     image= Image.open('images/nuage.jpg') 
     st.image(image, width=698)   
     st.write("Ce premier nuage de points permet d'identifier **trois groupes d'individus**, " 
-             "la somme totale du temps passé sur le site en fonction du nombre de visites. (variables choisies de manière arbitraire) "
+             "la somme totale du temps passé sur le site en fonction du nombre de visites. (variables choisies de manière arbitraire)")
 
              
     """
@@ -201,11 +201,11 @@ elif menu == "Projet et résultats":
     image= Image.open('images/top3.jpg') 
     st.image(image, width=698)   
     st.write("On constate une **croissance** des ventes pour **l’item 461686**, avec un **pic au mois d’août**, "
-             "accompagné d’une **légère baisse** des ventes au **mois de septembre**. Il s‘agit peut-être d’un item dit **« saisonnier »** "
+             "accompagné d’une **légère baisse** des ventes au **mois de septembre**. Il s‘agit peut-être d’un item dit **« saisonnier »**"
              "(ex : ventilateur). L’intérêt des visiteurs pour l’item 119736 a été assez régulier tout au long des mois, "
              "avec tout de même une **baisse durant le mois de septembre**." 
              "Enfin, on constate que **l’item 213834 n’a pas été acheté au mois de mai.**" 
-             "Cependant, il a été acheté de nombreuses fois au **mois de juillet** puis **peu de fois en août**. "        
+             "Cependant, il a été acheté de nombreuses fois au **mois de juillet** puis **peu de fois en août**. ")        
              
              
 
