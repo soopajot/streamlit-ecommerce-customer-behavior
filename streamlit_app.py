@@ -196,7 +196,7 @@ elif menu == "Projet et résultats":
     image= Image.open('images/top_itemid.jpg') 
     st.image(image, width=698)   
     st.write("Cet histogramme affiche les 15 items les plus achetés, ainsi que le nombre de fois où ils ont été achetés." 
-             "Ainsi, on constate que 3 produits se démarquent fortement. Ces 3 items ont pour itemid **461686**, **119736**, **213834**"
+             "Ainsi, on constate que 3 produits se démarquent fortement. Ces 3 items ont pour itemid **461686**, **119736**, **213834**")
       
     image= Image.open('images/top3.jpg') 
     st.image(image, width=698)   
