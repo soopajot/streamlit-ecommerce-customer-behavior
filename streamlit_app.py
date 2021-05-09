@@ -258,8 +258,9 @@ elif menu == "Présentation des 3 dataset":
         sns.scatterplot(data=time_sum_tran_sample, x="sum_time_hour", y=time_sum_tran_sample.index, hue="kmean2_label")
         st.pyplot(fig)
              
-        st.write("Dans le cluster 0, les consommateurs ont tendance à passer entre 15h et 23h pour effectuer une transaction,"
-                 "pour le cluster 1 nous sommes entre 5h et 14h, enfin le cluster 2 la tendance se situe entre moins d’une heure et 4h.")
+        st.write("Dans le cluster 0, les consommateurs ont tendance à passer entre 0h et 5h pour effectuer une transaction,"
+                 "pour le cluster 1 nous sommes entre 5h et 14h, enfin le cluster 2 la tendance se situe entre moins "
+                 " d’une heure et 15h et 24h.")
 
         # DENDROGRAMME
         st.subheader("Vérifions le nombre de cluster optimal (n=3) en utilisant un dendrogramme comme celui-ci :")  
