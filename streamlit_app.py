@@ -145,11 +145,8 @@ elif menu == "Projet et résultats":
     "Ce heatmap présente également les variables liées au temps (**voir dans la partie présentation des datasets**) elle montre clairement que les variables citées ci-dessus ne sont pas corrélées avec le **temps moyen passé par un visiteur pour effectuer une transaction** (très **proche de 0**), et **faiblement corrélés** avec **le temps total passé par un visiteur pour effectuer ses achats** (**entre 0,30 et 0,34**).")
 
     # DATASET Stats pour la matrice de corrélation
-    stats_sample = pd.read_csv('csv/stats_sample.csv')
-
-    fig_3=plt.figure(figsize=(8,5))
-    sns.heatmap(stats_sample.corr(), annot=True, cmap='RdBu_r', center=0)
-    st.pyplot(fig_3);
+    imageheat= Image.open('images/heatmap.png') 
+    st.image(imageheat, width=698) 
 
 
     """
