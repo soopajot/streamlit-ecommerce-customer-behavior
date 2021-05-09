@@ -134,6 +134,26 @@ elif menu == "Projet et résultats":
     st.pyplot(fig_2);
              
     st.write("De plus les visiteurs ont tendance à **diminuer leurs activités** sur le site **durant les week-ends** et sont **réactifs en semaine**. Au niveau des horaires les visiteurs effectuent leurs actions à partir de **17 heures jusqu’au lendemain vers 7 heures**. Nous allons maintenant étudier la relation entre plusieurs variables.")
+    
+    
+      """
+    # Analyse des items achetés 
+    """
+
+    imageTop15= Image.open('images/15.PNG') 
+    st.image(imageTop15, width=698)   
+    st.write("Cet histogramme affiche les 15 items les plus achetés, ainsi que le nombre de fois où ils ont été achetés. " 
+             "Ainsi, on constate que 3 produits se démarquent fortement. Ces 3 items ont pour itemid **461686**, **119736**, **213834**.")
+      
+    imageTop3= Image.open('images/3.PNG') 
+    st.image(imageTop3, width=698)   
+    st.write("On constate une **croissance** des ventes pour **l’item 461686**, avec un **pic au mois d’août**, "
+             "accompagné d’une **légère baisse** des ventes au **mois de septembre**. Il s‘agit peut-être d’un item dit **« saisonnier »**"
+             "(ex : ventilateur). L’intérêt des visiteurs pour l’item 119736 a été assez régulier tout au long des mois, "
+             "avec tout de même une **baisse durant le mois de septembre**." 
+             "Enfin, on constate que **l’item 213834 n’a pas été acheté au mois de mai.**" 
+             "Cependant, il a été acheté de nombreuses fois au **mois de juillet** puis **peu de fois en août**. ") 
+    
 
     """
     # Relation entre les différentes variables
@@ -185,26 +205,7 @@ elif menu == "Projet et résultats":
     st.image(imageNuage, width=698)   
     st.write("Ce premier nuage de points permet d'identifier **trois groupes d'individus**, " 
              "la somme totale du temps passé sur le site en fonction du nombre de visites. (variables choisies de manière arbitraire)")
-
-             
-    """
-    # Analyse des items achetés 
-    """
-
-    imageTop15= Image.open('images/15.PNG') 
-    st.image(imageTop15, width=698)   
-    st.write("Cet histogramme affiche les 15 items les plus achetés, ainsi que le nombre de fois où ils ont été achetés. " 
-             "Ainsi, on constate que 3 produits se démarquent fortement. Ces 3 items ont pour itemid **461686**, **119736**, **213834**.")
-      
-    imageTop3= Image.open('images/3.PNG') 
-    st.image(imageTop3, width=698)   
-    st.write("On constate une **croissance** des ventes pour **l’item 461686**, avec un **pic au mois d’août**, "
-             "accompagné d’une **légère baisse** des ventes au **mois de septembre**. Il s‘agit peut-être d’un item dit **« saisonnier »**"
-             "(ex : ventilateur). L’intérêt des visiteurs pour l’item 119736 a été assez régulier tout au long des mois, "
-             "avec tout de même une **baisse durant le mois de septembre**." 
-             "Enfin, on constate que **l’item 213834 n’a pas été acheté au mois de mai.**" 
-             "Cependant, il a été acheté de nombreuses fois au **mois de juillet** puis **peu de fois en août**. ")        
-             
+ 
              
             
 elif menu == "Présentation des 3 dataset":
