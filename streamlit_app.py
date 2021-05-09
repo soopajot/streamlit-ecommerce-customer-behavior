@@ -136,7 +136,7 @@ elif menu == "Projet et résultats":
     st.write("De plus les visiteurs ont tendance à **diminuer leurs activités** sur le site **durant les week-ends** et sont **réactifs en semaine**. Au niveau des horaires les visiteurs effectuent leurs actions à partir de **17 heures jusqu’au lendemain vers 7 heures**. Nous allons maintenant étudier la relation entre plusieurs variables.")
     
     
-      """
+    """
     # Analyse des items achetés 
     """
 
